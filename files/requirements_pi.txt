@@ -1,0 +1,12 @@
+# Raspberry Pi Requirements
+# Install with: pip3 install -r requirements_pi.txt
+
+# Core dependencies
+opencv-python-headless==4.8.1.78
+numpy==1.24.3
+onnxruntime==1.16.3
+
+# Note: opencv-python-headless is used to avoid Qt conflicts on headless systems
+# If you need GUI functionality, use opencv-python instead
+
+# InsightFace models are downloaded separately (see PI_SETUP_README.md)
