@@ -6,7 +6,7 @@ from datetime import datetime
 SAVE_DIR = "images"
 os.makedirs(SAVE_DIR, exist_ok=True)
 
-print("\n=== IMAGE CAPTURE MODE ===")
+print("\n=== RASPBERRY PI IMAGE CAPTURE ===")
 print("Controls:")
 print("  SPACE - Capture & Save Image")
 print("  ESC   - Exit\n")
@@ -18,11 +18,18 @@ if not person_id:
     print("ERROR: ID cannot be empty")
     exit(1)
 
-# ---------------- Open Camera ----------------
-cap = cv2.VideoCapture(0)  # 0 = default webcam
+# ---------------- GStreamer Pipeline ----------------
+pipeline = (
+    "libcamerasrc ! "
+    "video/x-raw,width=1640,height=1232,framerate=30/1 ! "
+    "videoconvert ! "
+    "appsink"
+)
+
+cap = cv2.VideoCapture(pipeline, cv2.CAP_GSTREAMER)
 
 if not cap.isOpened():
-    print("ERROR: Could not open camera")
+    print("ERROR: Could not open Raspberry Pi camera")
     exit(1)
 
 print("\nCamera started...\n")
@@ -34,15 +41,16 @@ try:
             print("ERROR: Failed to read frame")
             break
 
-        # Display instructions on frame
-        cv2.putText(frame, "SPACE = Capture | ESC = Exit",
-                    (20, 30),
+        # Display instructions
+        cv2.putText(frame,
+                    "SPACE = Capture | ESC = Exit",
+                    (20, 40),
                     cv2.FONT_HERSHEY_SIMPLEX,
-                    0.7,
+                    0.8,
                     (0, 255, 255),
                     2)
 
-        cv2.imshow("Camera", frame)
+        cv2.imshow("Pi Camera", frame)
 
         key = cv2.waitKey(1)
 
