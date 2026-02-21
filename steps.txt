@@ -1,0 +1,46 @@
+sudo nano /etc/systemd/system/face_recognition.service
+
+
+
+
+
+
+[Unit]
+Description=Face Recognition Display
+After=network.target
+
+[Service]
+User=dreamvu
+WorkingDirectory=/home/dreamvu/sensor
+ExecStart=/usr/bin/python3 /home/dreamvu/sensor/live_recog_display.py
+Restart=always
+RestartSec=3
+
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/dreamvu/.Xauthority
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+
+
+sudo systemctl daemon-reload
+
+
+
+
+
+
+sudo systemctl enable face_recognition.service
+
+
+
+sudo systemctl start face_recognition.service
+
+
+
+
+sudo systemctl status face_recognition.service
