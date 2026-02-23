@@ -12,7 +12,7 @@ After=network.target
 [Service]
 User=dreamvu
 WorkingDirectory=/home/dreamvu/sensor
-ExecStart=/usr/bin/python3 /home/dreamvu/sensor/live_recog_display.py
+ExecStart=/usr/bin/python3 /home/dreamvu/sensor/app.py
 Restart=always
 RestartSec=3
 
