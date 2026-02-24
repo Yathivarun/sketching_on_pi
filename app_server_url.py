@@ -21,8 +21,8 @@ import tkinter as tk
 from PIL import Image, ImageTk
 
 # ---------------- CONFIG ----------------
-BASE = os.path.expanduser("~/.insightface/models/light")
-SCRFD_MODEL = os.path.join(BASE, "scrfd_500m_bnkps.onnx")
+BASE = os.path.expanduser("~/.insightface/models")
+SCRFD_MODEL = os.path.join(BASE, "scrfd_500m.onnx")
 ARCFACE_MODEL = os.path.join(BASE, "glintr100.onnx")
 
 STOCK_DIR = Path("stock_images")
@@ -34,9 +34,9 @@ MIN_FACE_SIZE      = 80
 PROCESS_INTERVAL   = 1.5
 BURST_FRAMES       = 5
 PRECHECK_DOWNSCALE = 0.5
-SLIDE_DURATION     = 3
+SLIDE_DURATION     = 7
 FADE_STEPS         = 24       # frames for fade (matches ~0.4s at ~60fps feel)
-COOLDOWN_TIME      = 20.0
+COOLDOWN_TIME      = 2.0
 REQUEST_TIMEOUT    = 5
 
 # ---------------- SCREEN RESOLUTION ----------------
